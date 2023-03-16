@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using IniParser;
 using IniParser.Model;
 using System.IO;
+using UnityEngine;
 
 namespace IMDLAB.EasyKeyPlayer
 {

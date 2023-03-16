@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using UnityEngine.Video;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 namespace IMDLAB.EasyKeyPlayer
 {
@@ -86,6 +84,7 @@ namespace IMDLAB.EasyKeyPlayer
                 UI.enabled = true;
                 var raw = File.ReadAllBytes(media.Value.path);
                 var texture2d = new Texture2D(1, 1);
+                texture2d.filterMode = FilterMode.Point;
                 texture2d.LoadImage(raw);
                 Container.texture = texture2d;
                 Player.Stop();
