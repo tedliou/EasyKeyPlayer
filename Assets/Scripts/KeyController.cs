@@ -6,14 +6,14 @@ namespace IMDLAB.EasyKeyPlayer
     public class KeyController : MonoBehaviour
     {
         private KeyCode[] Keys = new KeyCode[] {
-            KeyCode.Alpha0,
             KeyCode.Alpha1,
             KeyCode.Alpha2,
             KeyCode.Alpha3,
             KeyCode.Alpha4,
             KeyCode.Alpha5,
             KeyCode.Alpha6,
-            KeyCode.Alpha7
+            KeyCode.Alpha7,
+            KeyCode.Alpha8
         };
 
         private void Update()
@@ -24,7 +24,8 @@ namespace IMDLAB.EasyKeyPlayer
                 {
                     if (MediaManager.Instance)
                     {
-                        MediaManager.Instance.PlayMedia(i);
+                        var id = i + 1;
+                        MediaManager.Instance.PlayMedia(id);
                         return;
                     }
                 }

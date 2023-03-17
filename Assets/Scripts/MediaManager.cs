@@ -12,9 +12,7 @@ namespace IMDLAB.EasyKeyPlayer
         internal static MediaManager Instance { get; private set; }
 
         public VideoPlayer Player;
-        public Canvas UI;
         public RawImage Container;
-        public GameObject Copyright;
 
         private const string PATH = "EasyKeyPlayer_Media";
         private const string PICTURE_PATTERN = @"\d+\.(jpg|jpeg|png)";
@@ -30,7 +28,6 @@ namespace IMDLAB.EasyKeyPlayer
         {
             Instance = this;
             ReadFiles();
-            Player.loopPointReached += Player_loopPointReached;
         }
 
         private void Start()
@@ -63,7 +60,7 @@ namespace IMDLAB.EasyKeyPlayer
             }
         }
 
-        internal void PlayMedia(int id, bool loop = false)
+        internal void PlayMedia(int id)
         {
             var media = GetMediaPath(id);
             if (media is null)
@@ -75,14 +72,18 @@ namespace IMDLAB.EasyKeyPlayer
 
             if (media.Value.isMovie)
             {
-                UI.enabled = false;
+                Container.gameObject.SetActive(false);
+                if (Player.isPlaying)
+                {
+                    Player.Stop();
+                }
                 Player.url = media.Value.path;
-                Player.isLooping = loop;
+                Player.isLooping = true;
                 Player.Play();
             }
             else
             {
-                UI.enabled = true;
+                Container.gameObject.SetActive(true);
                 var raw = File.ReadAllBytes(media.Value.path);
                 var texture2d = new Texture2D(1, 1);
                 texture2d.filterMode = FilterMode.Point;
@@ -90,17 +91,13 @@ namespace IMDLAB.EasyKeyPlayer
                 Container.texture = texture2d;
                 Player.Stop();
                 Player.url = string.Empty;
-                Player.isLooping = false;
+                Player.isLooping = true;
             }
-
-            Copyright.SetActive(false);
         }
 
         internal void PlayDefaultMedia()
         {
-            Player.Stop();
-            UI.enabled = true;
-            Copyright.SetActive(true);
+            PlayMedia(0);
         }
 
         internal (bool isMovie, string path)? GetMediaPath(int id)
@@ -130,14 +127,6 @@ namespace IMDLAB.EasyKeyPlayer
         {
             return Movies.Where(file => Regex.Match(file.Split(@"/").Last(), string.Format(MOVIE_ID_PATTERN, id)).Success)
                         .FirstOrDefault();
-        }
-
-        private void Player_loopPointReached(VideoPlayer videoPlayer)
-        {
-            if (!videoPlayer.isLooping)
-            {
-                PlayDefaultMedia();
-            }
         }
     }
 }
