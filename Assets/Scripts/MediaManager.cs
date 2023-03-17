@@ -17,9 +17,9 @@ namespace IMDLAB.EasyKeyPlayer
 
         private const string PATH = "EasyKeyPlayer_Media";
         private const string PICTURE_PATTERN = @"\d+\.(jpg|jpeg|png)";
-        private const string MOVIE_PATTERN = @"\d+\.(mp4|avi)";
+        private const string MOVIE_PATTERN = @"\d+\.(mp4)";
         private const string PICTURE_ID_PATTERN = @"^{0}\.(jpg|jpeg|png)";
-        private const string MOVIE_ID_PATTERN = @"^{0}\.(mp4|avi)";
+        private const string MOVIE_ID_PATTERN = @"^{0}\.(mp4)";
         [SerializeField]
         private string[] Pictures;
         [SerializeField]
