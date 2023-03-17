@@ -13,9 +13,7 @@ namespace IMDLAB.EasyKeyPlayer
             KeyCode.Alpha4,
             KeyCode.Alpha5,
             KeyCode.Alpha6,
-            KeyCode.Alpha7,
-            KeyCode.Alpha8,
-            KeyCode.Alpha9
+            KeyCode.Alpha7
         };
 
         private void Update()
@@ -26,14 +24,7 @@ namespace IMDLAB.EasyKeyPlayer
                 {
                     if (MediaManager.Instance)
                     {
-                        if (i == 0)
-                        {
-                            MediaManager.Instance.PlayDefaultMedia();
-                        }
-                        else
-                        {
-                            MediaManager.Instance.PlayMedia(i);
-                        }
+                        MediaManager.Instance.PlayMedia(i);
                         return;
                     }
                 }

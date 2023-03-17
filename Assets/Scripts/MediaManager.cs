@@ -14,6 +14,7 @@ namespace IMDLAB.EasyKeyPlayer
         public VideoPlayer Player;
         public Canvas UI;
         public RawImage Container;
+        public GameObject Copyright;
 
         private const string PATH = "EasyKeyPlayer_Media";
         private const string PICTURE_PATTERN = @"\d+\.(jpg|jpeg|png)";
@@ -92,12 +93,14 @@ namespace IMDLAB.EasyKeyPlayer
                 Player.isLooping = false;
             }
 
-            Debug.Log(media);
+            Copyright.SetActive(false);
         }
 
         internal void PlayDefaultMedia()
         {
-            PlayMedia(0, true);
+            Player.Stop();
+            UI.enabled = true;
+            Copyright.SetActive(true);
         }
 
         internal (bool isMovie, string path)? GetMediaPath(int id)
